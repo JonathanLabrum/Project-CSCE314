@@ -1,0 +1,19 @@
+What is a try/catch block and why do we need one?
+
+
+What is an exception?
+
+
+We choose ArrayList over Vector because...?
+
+
+Why didn't I have to declare this static? (enum Muscle)
+
+
+This is a nested class, also known as an inner class. Why do we use a nested class? (private class Workout)
+
+
+How do we get the name of an enumeration value?
+
+
+What is short-circuit evaluation?
