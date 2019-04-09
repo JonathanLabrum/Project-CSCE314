@@ -8,7 +8,7 @@ We choose ArrayList over Vector because...?
 
 
 Why didn't I have to declare this static? (enum Muscle)
-
+Because it is a public enum.
 
 This is a nested class, also known as an inner class. Why do we use a nested class? (private class Workout)
 

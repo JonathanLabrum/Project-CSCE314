@@ -30,22 +30,97 @@ public class Workouts
 	
 		Workout(String name, Equipment equipment, Muscle primaryMuscle, Muscle secondaryMuscle, String desc, String reminders)
 		{
-			
+			this.name = name;
+			this.equipment = equipment;
+			this.primaryMuscle = primaryMuscle;
+			this.secondaryMuscle = secondaryMuscle;
+			this.desc = desc;
+			this.reminders = reminders;
+		}
+
+		public String getName()
+		{
+			return name;
+		}
+
+		public void setName(String name)
+		{
+			this.name = name;
+		}
+
+		public Equipment getEquipment()
+		{
+			return equipment;
+		}
+
+		public void setEquipment(Equipment equipment)
+		{
+			this.equipment = equipment;
+		}
+
+		public Muscle getPrimaryMuscle()
+		{
+			return primaryMuscle;
+		}
+
+		public void setPrimaryMuscle(Muscle primaryMuscle)
+		{
+			this.primaryMuscle = primaryMuscle;
+		}
+
+		public Muscle getSecondaryMuscle()
+		{
+			return secondaryMuscle;
+		}
+
+		public void setSecondaryMuscle(Muscle secondaryMuscle)
+		{
+			this.secondaryMuscle = secondaryMuscle;
+		}
+
+		public String getDesc()
+		{
+			return desc;
+		}
+
+		public void setDesc(String desc)
+		{
+			this.desc = desc;
+		}
+
+		public String getReminders()
+		{
+			return reminders;
+		}
+
+		public void setReminders(String reminders)
+		{
+			this.reminders = reminders;
 		}
 		
 		// How do we get the name of an enumeration value?
+		public String equipmentToString(Equipment e)
+		{
+			
+		}
+		
+		public String muscleToString(Muscle m)
+		{
+			
+		}
 	}
 
 	// This function adds a new workout to the Workouts object.
 	public final void addWorkout(String name, Equipment equipment, Muscle primaryMuscle, Muscle secondaryMuscle, String desc, String reminders)
 	{
-		
+		Workout workout = new Workout(name, equipment, primaryMuscle, secondaryMuscle, desc, reminders);
+		addWorkout(workout);
 	}
 
 	// This function adds a workout to the Workouts object.
 	public final void addWorkout(Workout workout)
 	{
-		
+		workoutList.add(workout);
 	}
   
 	// This list returns a new Workouts object that contains only the workouts that contain the
@@ -55,13 +130,34 @@ public class Workouts
 	public final Workouts getWorkoutsByMuscle(Muscle m, boolean includeSecondary)
 	{
 		// What is short-circuit evaluation?
+		Workouts workoutsByMuscle = new Workouts();
+		if (includeSecondary)
+		{
+			for (int i = 0; i < workoutList.size(); i++)
+			{
+				for (Muscle primaryMuscle : Muscle.values())
+				{
+					if (workoutList.get(i).getPrimaryMuscle() == primaryMuscle)
+					{
+						
+					}
+				}
+			}
+		}
+		else
+		{
+			
+		}
 	}
 	
 	// This list returns a new Workouts object that contains only the workouts that contain the
 	// Equipment value that is provided as an argument.
 	public final Workouts getWorkoutsByEquipment(Equipment e)
 	{
+		Workouts workoutsByEquip = new Workouts();
 		
+		
+		return workoutsByEquip;
 	}
 	
 	// This returns a new Workouts object that contains only the workouts that contain an Equipment
@@ -74,7 +170,11 @@ public class Workouts
 	// This method returns an ArrayList of Strings. Each String is a name of a workout in our Workouts list.
 	public final ArrayList<String> getNames()
 	{
+		ArrayList<String> names = new ArrayList<String>();
+		for (Workout workout : workoutList)
+			names.add(workout.getName());
 		
+		return names;
 	}
 
 	// This method returns all the information of the Workouts as an ArrayList of String arrays,
@@ -82,6 +182,31 @@ public class Workouts
 	// Equipment, Primary and Secondary Muscles, Description, and Reminders. All of these should be strings.
 	public final ArrayList<String[]> getFullInformation()
 	{
+		ArrayList<String[]> fullInfo = new ArrayList<String[]>();
+		String[] names = null;
+		String[] equipment = null;
+		String[] primaryMuscles = null;
+		String[] secondaryMuscles = null;
+		String[] desc = null;
+		String[] reminders = null;
 		
+		for (int i = 0; i < workoutList.size(); i++)
+		{
+			names[i] = workoutList.get(i).getName();
+			equipment[i] = workoutList.get(i).getEquipment();
+			primaryMuscles[i] = workoutList.get(i).getPrimaryMuscle();
+			secondaryMuscles[i] = workoutList.get(i).getSecondaryMuscle();
+			desc[i] = workoutList.get(i).getDesc();
+			reminders[i] = workoutList.get(i).getReminders();
+		}
+		
+		fullInfo.add(names);
+		fullInfo.add(equipment);
+		fullInfo.add(primaryMuscles);
+		fullInfo.add(secondaryMuscles);
+		fullInfo.add(desc);
+		fullInfo.add(reminders);
+		
+		return fullInfo;
 	}
 }
