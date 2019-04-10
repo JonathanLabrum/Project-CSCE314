@@ -99,15 +99,6 @@ public class Workouts
 		}
 		
 		// How do we get the name of an enumeration value?
-		public String equipmentToString(Equipment e)
-		{
-			
-		}
-		
-		public String muscleToString(Muscle m)
-		{
-			
-		}
 	}
 
 	// This function adds a new workout to the Workouts object.
@@ -131,40 +122,60 @@ public class Workouts
 	{
 		// What is short-circuit evaluation?
 		Workouts workoutsByMuscle = new Workouts();
+		
 		if (includeSecondary)
 		{
-			for (int i = 0; i < workoutList.size(); i++)
+			for (Workout workout : workoutList)
 			{
 				for (Muscle primaryMuscle : Muscle.values())
 				{
-					if (workoutList.get(i).getPrimaryMuscle() == primaryMuscle)
-					{
-						
-					}
+					if ((workout.getPrimaryMuscle() == primaryMuscle) && (workout.getSecondaryMuscle() == Muscle.NONE))
+						workoutsByMuscle.workoutList.add(workout);
 				}
 			}
 		}
 		else
 		{
-			
+			for (Workout workout : workoutList)
+			{
+				for (Muscle primaryMuscle : Muscle.values())
+				{
+					if (workout.getPrimaryMuscle() == primaryMuscle)
+						workoutsByMuscle.workoutList.add(workout);
+				}
+			}
 		}
+		
+		return workoutsByMuscle;
 	}
 	
 	// This list returns a new Workouts object that contains only the workouts that contain the
 	// Equipment value that is provided as an argument.
 	public final Workouts getWorkoutsByEquipment(Equipment e)
 	{
-		Workouts workoutsByEquip = new Workouts();
+		ArrayList<Equipment> equipment = new ArrayList<Equipment>();
+		equipment.add(e);
 		
-		
-		return workoutsByEquip;
+		return getWorkoutsByEquipment(equipment);
 	}
 	
 	// This returns a new Workouts object that contains only the workouts that contain an Equipment
 	// value that is in the provided ArrayList of Equipment.
 	public final Workouts getWorkoutsByEquipment(ArrayList<Equipment> e)
 	{
+		Workouts workoutsByEquip = new Workouts();
 		
+		for (Equipment equip : e)
+		{
+			for (Workout workout : workoutList)
+			{
+				Equipment equipment = workout.getEquipment();
+				if (equipment == equip)
+					workoutsByEquip.workoutList.add(workout);
+			}
+		}
+		
+		return workoutsByEquip;
 	}
 
 	// This method returns an ArrayList of Strings. Each String is a name of a workout in our Workouts list.
@@ -183,29 +194,19 @@ public class Workouts
 	public final ArrayList<String[]> getFullInformation()
 	{
 		ArrayList<String[]> fullInfo = new ArrayList<String[]>();
-		String[] names = null;
-		String[] equipment = null;
-		String[] primaryMuscles = null;
-		String[] secondaryMuscles = null;
-		String[] desc = null;
-		String[] reminders = null;
 		
 		for (int i = 0; i < workoutList.size(); i++)
 		{
-			names[i] = workoutList.get(i).getName();
-			equipment[i] = workoutList.get(i).getEquipment();
-			primaryMuscles[i] = workoutList.get(i).getPrimaryMuscle();
-			secondaryMuscles[i] = workoutList.get(i).getSecondaryMuscle();
-			desc[i] = workoutList.get(i).getDesc();
-			reminders[i] = workoutList.get(i).getReminders();
+			String[] workout = new String[6];
+			workout[0] = workoutList.get(i).getName();
+			workout[1] = workoutList.get(i).getEquipment().name();
+			workout[2] = workoutList.get(i).getPrimaryMuscle().name();
+			workout[3] = workoutList.get(i).getSecondaryMuscle().name();
+			workout[4] = workoutList.get(i).getDesc();
+			workout[5] = workoutList.get(i).getReminders();
+			
+			fullInfo.add(workout);
 		}
-		
-		fullInfo.add(names);
-		fullInfo.add(equipment);
-		fullInfo.add(primaryMuscles);
-		fullInfo.add(secondaryMuscles);
-		fullInfo.add(desc);
-		fullInfo.add(reminders);
 		
 		return fullInfo;
 	}

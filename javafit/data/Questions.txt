@@ -14,6 +14,6 @@ This is a nested class, also known as an inner class. Why do we use a nested cla
 
 
 How do we get the name of an enumeration value?
-
+Using the built in name() function.
 
 What is short-circuit evaluation?
