@@ -123,26 +123,20 @@ public class Workouts
 		// What is short-circuit evaluation?
 		Workouts workoutsByMuscle = new Workouts();
 		
-		if (includeSecondary)
+		if (!includeSecondary)
 		{
 			for (Workout workout : workoutList)
 			{
-				for (Muscle primaryMuscle : Muscle.values())
-				{
-					if ((workout.getPrimaryMuscle() == primaryMuscle) && (workout.getSecondaryMuscle() == Muscle.NONE))
-						workoutsByMuscle.workoutList.add(workout);
-				}
+				if ((workout.getPrimaryMuscle() == m) && (workout.getSecondaryMuscle() == Muscle.NONE))
+					workoutsByMuscle.workoutList.add(workout);
 			}
 		}
 		else
 		{
 			for (Workout workout : workoutList)
 			{
-				for (Muscle primaryMuscle : Muscle.values())
-				{
-					if (workout.getPrimaryMuscle() == primaryMuscle)
-						workoutsByMuscle.workoutList.add(workout);
-				}
+				if (workout.getPrimaryMuscle() == m)
+					workoutsByMuscle.workoutList.add(workout);
 			}
 		}
 		
@@ -169,8 +163,7 @@ public class Workouts
 		{
 			for (Workout workout : workoutList)
 			{
-				Equipment equipment = workout.getEquipment();
-				if (equipment == equip)
+				if (workout.getEquipment() == equip)
 					workoutsByEquip.workoutList.add(workout);
 			}
 		}

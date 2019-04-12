@@ -14,16 +14,17 @@ public class FileAccess
 		try
 		{
 			Scanner scanner = new Scanner(new File(file));
-			scanner.useDelimiter(",");
-			//while loop?
-			for (int i = 0; i < 5; i++)
+			
+			while (scanner.hasNextLine())
 			{
-				String name = scanner.next();
-				Workouts.Equipment equipment = Workouts.Equipment.valueOf(scanner.next());
-				Workouts.Muscle primaryMuscle = Workouts.Muscle.valueOf(scanner.next());
-				Workouts.Muscle secondaryMuscle = Workouts.Muscle.valueOf(scanner.next());
-				String desc = scanner.next();
-				String reminders = scanner.next();
+				String line = scanner.nextLine();
+				String [] lineSplit = line.split(",");
+				String name = lineSplit[0];
+				Workouts.Equipment equipment = Workouts.Equipment.valueOf(lineSplit[1]);
+				Workouts.Muscle primaryMuscle = Workouts.Muscle.valueOf(lineSplit[2]);
+				Workouts.Muscle secondaryMuscle = Workouts.Muscle.valueOf(lineSplit[3]);
+				String desc = lineSplit[4];
+				String reminders = lineSplit[5];
 
 				workouts.addWorkout(name, equipment, primaryMuscle, secondaryMuscle, desc, reminders);
 			}
@@ -32,7 +33,6 @@ public class FileAccess
 
 		} catch (FileNotFoundException e1)
 		{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
