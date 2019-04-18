@@ -1,41 +1,50 @@
-// Write code to load the workouts from the provided workouts.csv file. The function should return a Workouts object.
-import java.io.*;
+// This file gives access to the underlying datafile and stores the data in the Workout class.
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.Scanner;
 
 public class FileAccess
 {
+
 	public static Workouts loadWorkouts()
 	{
-		// What is a try/catch block and why do we need one?
-		// What is an exception?
 		Workouts workouts = new Workouts();
-		String file = Config.WORKOUTFILE;
 
 		try
 		{
-			Scanner scanner = new Scanner(new File(file));
-			
+			Scanner scanner = new Scanner(new File(Config.WORKOUTFILE));
 			while (scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
-				String [] lineSplit = line.split(",");
-				String name = lineSplit[0];
-				Workouts.Equipment equipment = Workouts.Equipment.valueOf(lineSplit[1]);
-				Workouts.Muscle primaryMuscle = Workouts.Muscle.valueOf(lineSplit[2]);
-				Workouts.Muscle secondaryMuscle = Workouts.Muscle.valueOf(lineSplit[3]);
-				String desc = lineSplit[4];
-				String reminders = lineSplit[5];
-
+				String[] fields = line.split(",");
+				// Check to make sure glen didn't bork the data file.
+				if (fields.length != 6)
+					System.out.println("Line has " + fields.length + " fields instead of 6. Check your commas.");
+				String name = fields[0];
+				Config.Equipment equipment = Config.Equipment.valueOf(fields[1]);
+				Config.Muscle primaryMuscle = Config.Muscle.valueOf(fields[2]);
+				Config.Muscle secondaryMuscle = Config.Muscle.valueOf(fields[3]);
+				String desc = fields[4];
+				String reminders = fields[5];
 				workouts.addWorkout(name, equipment, primaryMuscle, secondaryMuscle, desc, reminders);
 			}
-			
 			scanner.close();
-
-		} catch (FileNotFoundException e1)
+		} catch (FileNotFoundException e)
 		{
-			e1.printStackTrace();
+			System.out.println("Unable to find workouts file. Is it in the same directory as the executable?\nError:" + e.toString());
 		}
-
 		return workouts;
+	}
+
+	public static EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>> loadFormats()
+	{
+
+		EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>> enumMap = new EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>>(Config.MuscleGroup.class);
+
+		// Code goes here.
+
+		return enumMap;
 	}
 }
