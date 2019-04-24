@@ -20,9 +20,9 @@ public class MainWindow
 	private JComboBox<String> cboType, cboGoal;
 	private JSpinner spnDuration;
 	private final Workouts workouts;
-	private final EnumMap<Config.MuscleGroup, ArrayList<Workouts.Muscle>> muscleGroups;
+	private final EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>> muscleGroups;
 
-	MainWindow(Workouts workouts, EnumMap<Config.MuscleGroup, ArrayList<Workouts.Muscle>> muscleGroups)
+	MainWindow(Workouts workouts, EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>> muscleGroups)
 	{
 		// Code goes here.
 	}

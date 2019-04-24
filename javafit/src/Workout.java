@@ -19,9 +19,7 @@ public class Workout
 		this.reminders = reminders;
 	}
 
-    protected boolean hasPrimaryMuscle(Config.Muscle m) { return primaryMuscle == m; }
-    protected boolean hasSecondaryMuscle(Config.Muscle m) { return secondaryMuscle == m; }
-    protected boolean hasEquipment(Config.Equipment e) { return equipment == e; }
+	protected boolean hasEquipment(Config.Equipment e) { return equipment == e; }
 	protected boolean hasEquipment(ArrayList<Config.Equipment> equipmentList)
 	{
 		for (Config.Equipment e : equipmentList)
@@ -31,28 +29,49 @@ public class Workout
 		}
 		return false;
 	}
+	
+	protected boolean hasPrimaryMuscle(Config.Muscle m) { return primaryMuscle == m; }
+	protected boolean hasSecondaryMuscle(Config.Muscle m) { return secondaryMuscle == m; }
+	protected boolean hasPrimaryMuscle(ArrayList<Config.Muscle> muscleList)
+	{
+		for (Config.Muscle m : muscleList)
+		{
+			if (hasPrimaryMuscle(m))
+				return true;
+		}
+		return false;
+	}
+	protected boolean hasSecondaryMuscle(ArrayList<Config.Muscle> muscleList)
+	{
+		for (Config.Muscle m : muscleList)
+		{
+			if (hasSecondaryMuscle(m))
+				return true;
+		}
+		return false;
+	}
 
-    public String getName() { return name; }
-    
+	public String getName() { return name; }
+
 	public void setName(String name) { this.name = name; }
 
 	public Config.Equipment getEquipment() { return equipment; }
-	
+
 	public void setEquipment(Config.Equipment equipment) { this.equipment = equipment; }
 	
 	public Config.Muscle getPrimaryMuscle() { return primaryMuscle; }
-	
+
 	public void setPrimaryMuscle(Config.Muscle primaryMuscle) { this.primaryMuscle = primaryMuscle; }
-	
+
 	public Config.Muscle getSecondaryMuscle() { return secondaryMuscle; }
-	
+
 	public void setSecondaryMuscle(Config.Muscle secondaryMuscle) { this.secondaryMuscle = secondaryMuscle; }
-	
+
 	public String getDesc() { return desc; }
-	
+
 	public void setDesc(String desc) { this.desc = desc; }
-	
+
 	public String getReminders() { return reminders; }
-	
+
 	public void setReminders(String reminders) { this.reminders = reminders; }
 }
