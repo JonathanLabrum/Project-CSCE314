@@ -8,7 +8,7 @@ public class Workouts
 	// This should return the number of workouts in the class.
 	public final int size()
 	{
-		
+		return workoutList.size();
 	}
 
 	public final void addWorkout(String name, Config.Equipment equipment, Config.Muscle primaryMuscle, Config.Muscle secondaryMuscle, String desc, String reminders)
@@ -25,20 +25,20 @@ public class Workouts
 	// This should return an instance of the workout class that matches the index in the workoutList.
 	public final Workout getWorkout(int index)
 	{
-		
+		return workoutList.get(index);
 	}
 	
 	// This should return the equipment of the workout at the given index.
 	public final String getWorkoutEquipment(int index)
 	{
-		Workout workout = workoutList.get(index);
+		Workout workout = getWorkout(index);
 		return workout.getEquipment().name();
 	}
 	
 	// This searches through the list of workouts in the class and returns the index of the workout with that name.
 	public final int findWorkoutByName(String name)
 	{
-		int counter = 0;
+		int counter = 0; // incomplete?
 		for (Workout workout: workoutList)
 		{
 			if (name.equals(workout.getName()))
@@ -111,7 +111,10 @@ public class Workouts
 	public final ArrayList<String> getEquipment()
 	{
 		ArrayList<String> equip = new ArrayList<String>();
-		
+		for (Workout w : workoutList)
+		{
+			equip.add(w.getEquipment().name());
+		}
 		return equip;
 	}
 

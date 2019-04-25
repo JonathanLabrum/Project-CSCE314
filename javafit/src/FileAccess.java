@@ -43,8 +43,24 @@ public class FileAccess
 
 		EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>> enumMap = new EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>>(Config.MuscleGroup.class);
 
-		// Code goes here.
-
+		try
+		{
+			Scanner scanner = new Scanner(new File(Config.WORKOUTFORMATFILE));
+			while (scanner.hasNextLine())
+			{
+				String line = scanner.nextLine();
+				String[] fields = line.split(",");
+				ArrayList<Config.Muscle> muscleArray = new ArrayList<Config.Muscle>();
+				// start at second value and go to the end
+				for (int i = 1; i < fields.length; i++)
+					muscleArray.add(Config.Muscle.valueOf(fields[i])); // add muscles to array
+				enumMap.put(Config.MuscleGroup.valueOf(fields[0]), muscleArray);
+			}
+			scanner.close();
+		} catch (FileNotFoundException e)
+		{
+			System.out.println("Unable to find workout formats file. Is it in the same directory as the executable?\nError:" + e.toString());
+		}
 		return enumMap;
 	}
 }

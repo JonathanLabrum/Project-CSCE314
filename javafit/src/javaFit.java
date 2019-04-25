@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 /**
- * 
+ * Editor Jonathan Labrum
  */
 
 /**
