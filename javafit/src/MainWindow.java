@@ -24,18 +24,61 @@ public class MainWindow
 
 	MainWindow(Workouts workouts, EnumMap<Config.MuscleGroup, ArrayList<Config.Muscle>> muscleGroups)
 	{
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setVisible(true);
+		this.workouts = workouts;
+		this.muscleGroups = muscleGroups;
+		launchHomeScreen();
+
 	}
 
 	private void launchHomeScreen()
 	{
-		// Code goes here.
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		JButton upperbody = new JButton();
+		JButton lowerbody = new JButton();
+		JButton wholebody = new JButton();
+		upperbody.setText("Upperbody Workouts");
+		lowerbody.setText("Lowerbody Workouts");
+		wholebody.setText("Wholebody Workouts");
+		upperbody.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				showWorkouts(muscleGroups.get(Config.MuscleGroup.valueOf("UPPERBODY")));
+			}
+		});
+		lowerbody.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				showWorkouts(muscleGroups.get(Config.MuscleGroup.valueOf("LOWERBODY")));
+			}
+		});
+		wholebody.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				showWorkouts(muscleGroups.get(Config.MuscleGroup.valueOf("WHOLEBODY")));
+			}
+		});
+		panel.add(upperbody);
+		panel.add(lowerbody);
+		panel.add(wholebody);
+		mainFrame.add(panel);
+		mainFrame.setSize(600, 400);
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);
 	}
 
 	// This is the method your actionlistener should call. It should create and display a WorkoutsPanel.
 	private void showWorkouts(ArrayList<Config.Muscle> muscles)
 	{
-		// Code goes here.
+		WorkoutsPanel workoutsPanel = new WorkoutsPanel(muscles, workouts);
+		selectWorkout.add(workoutsPanel);
+		selectWorkout.setLayout(new FlowLayout());
+		selectWorkout.setSize(600, 400);
+		selectWorkout.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		selectWorkout.setVisible(true);
 	}
 }
