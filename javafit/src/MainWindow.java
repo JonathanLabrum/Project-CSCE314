@@ -31,8 +31,7 @@ public class MainWindow
 
 	private void launchHomeScreen()
 	{
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(3, 1));
+		JPanel panel = new JPanel(new GridLayout(3, 1));
 		JButton upperbody = new JButton("Upper Body Workout");
 		JButton lowerbody = new JButton("Lower Body Workout");
 		JButton wholebody = new JButton("Whole Body Workout");
@@ -40,6 +39,7 @@ public class MainWindow
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				mainFrame.remove(panel);
 				showWorkouts(muscleGroups.get(Config.MuscleGroup.valueOf("UPPERBODY")));
 			}
 		});
@@ -47,6 +47,7 @@ public class MainWindow
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				mainFrame.remove(panel);
 				showWorkouts(muscleGroups.get(Config.MuscleGroup.valueOf("LOWERBODY")));
 			}
 		});
@@ -54,6 +55,7 @@ public class MainWindow
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				mainFrame.remove(panel);
 				showWorkouts(muscleGroups.get(Config.MuscleGroup.valueOf("WHOLEBODY")));
 			}
 		});
@@ -71,10 +73,8 @@ public class MainWindow
 	private void showWorkouts(ArrayList<Config.Muscle> muscles)
 	{
 		WorkoutsPanel workoutsPanel = new WorkoutsPanel(muscles, workouts);
-		selectWorkout.add(workoutsPanel);
-		selectWorkout.setSize(600, 400);
-		selectWorkout.setLocationRelativeTo(null);
-		selectWorkout.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		selectWorkout.setVisible(true);
+		mainFrame.repaint();
+		mainFrame.add(workoutsPanel);
+		mainFrame.revalidate();
 	}
 }
