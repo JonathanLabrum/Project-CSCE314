@@ -1,10 +1,10 @@
-import java.util.ArrayList; // We choose ArrayList over Vector because...?
+import java.util.ArrayList;
 
 public class Workouts
 {
 
 	private final ArrayList<Workout> workoutList = new ArrayList<Workout>();
-	
+
 	// This should return the number of workouts in the class.
 	public final int size()
 	{
@@ -21,25 +21,25 @@ public class Workouts
 	{
 		workoutList.add(workout);
 	}
-	
+
 	// This should return an instance of the workout class that matches the index in the workoutList.
 	public final Workout getWorkout(int index)
 	{
 		return workoutList.get(index);
 	}
-	
+
 	// This should return the equipment of the workout at the given index.
 	public final String getWorkoutEquipment(int index)
 	{
 		Workout workout = getWorkout(index);
 		return workout.getEquipment().name();
 	}
-	
+
 	// This searches through the list of workouts in the class and returns the index of the workout with that name.
 	public final int findWorkoutByName(String name)
 	{
-		int counter = 0; // incomplete?
-		for (Workout workout: workoutList)
+		int counter = 0;
+		for (Workout workout : workoutList)
 		{
 			if (name.equals(workout.getName()))
 				return counter;
@@ -47,7 +47,7 @@ public class Workouts
 		}
 		return -1;
 	}
-	
+
 	public final Workouts getWorkoutsByEquipment(Config.Equipment e)
 	{
 		Workouts workoutsByEquip = new Workouts();
@@ -69,7 +69,7 @@ public class Workouts
 		}
 		return workoutsByEquip;
 	}
-	
+
 	public final Workouts getWorkoutsByMuscle(Config.Muscle m, boolean includeSecondary)
 	{
 		Workouts workoutsByMuscle = new Workouts();
@@ -82,7 +82,7 @@ public class Workouts
 		}
 		return workoutsByMuscle;
 	}
-	
+
 	// This should function just like the getWorkoutsByEquipment equivalent.
 	public final Workouts getWorkoutsByMuscle(ArrayList<Config.Muscle> m, boolean includeSecondary)
 	{
@@ -113,7 +113,8 @@ public class Workouts
 		ArrayList<String> equip = new ArrayList<String>();
 		for (Workout w : workoutList)
 		{
-			equip.add(w.getEquipment().name());
+			if (!equip.contains(w.getEquipment().name()))
+					equip.add(w.getEquipment().name());
 		}
 		return equip;
 	}

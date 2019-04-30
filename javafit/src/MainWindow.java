@@ -27,19 +27,15 @@ public class MainWindow
 		this.workouts = workouts;
 		this.muscleGroups = muscleGroups;
 		launchHomeScreen();
-
 	}
 
 	private void launchHomeScreen()
 	{
 		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		JButton upperbody = new JButton();
-		JButton lowerbody = new JButton();
-		JButton wholebody = new JButton();
-		upperbody.setText("Upperbody Workouts");
-		lowerbody.setText("Lowerbody Workouts");
-		wholebody.setText("Wholebody Workouts");
+		panel.setLayout(new GridLayout(3, 1));
+		JButton upperbody = new JButton("Upper Body Workout");
+		JButton lowerbody = new JButton("Lower Body Workout");
+		JButton wholebody = new JButton("Whole Body Workout");
 		upperbody.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -76,8 +72,8 @@ public class MainWindow
 	{
 		WorkoutsPanel workoutsPanel = new WorkoutsPanel(muscles, workouts);
 		selectWorkout.add(workoutsPanel);
-		selectWorkout.setLayout(new FlowLayout());
 		selectWorkout.setSize(600, 400);
+		selectWorkout.setLocationRelativeTo(null);
 		selectWorkout.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		selectWorkout.setVisible(true);
 	}
